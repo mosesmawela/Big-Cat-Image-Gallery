@@ -1,0 +1,45 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and subscription status",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string", "format": "uri" },
+        "isPro": { "type": "boolean", "description": "Whether the user has a Pro subscription" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "isPro"]
+    },
+    "Wallpaper": {
+      "title": "Wallpaper",
+      "description": "A wallpaper asset",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "url": { "type": "string", "format": "uri" },
+        "resolution": { "type": "string" },
+        "isPro": { "type": "boolean" },
+        "isLive": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "title", "category", "url"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile data"
+    },
+    "/wallpapers/{wallpaperId}": {
+      "schema": "Wallpaper",
+      "description": "Public wallpaper assets"
+    }
+  }
+}

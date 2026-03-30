@@ -155,7 +155,7 @@ export const WelcomeScreen: React.FC<{ onEnter: () => void }> = ({ onEnter }) =>
   return (
     <div className="relative bg-[#050505] text-white selection:bg-brand-peach/30">
         {/* Cinematic Background Layer */}
-        <ScrollSequence frameCount={157} progress={scrollYProgress} className="opacity-40" />
+        <ScrollSequence frameCount={79} progress={scrollYProgress} className="opacity-40" />
 
         {/* Studio Grain Texture */}
         <div className="fixed inset-0 pointer-events-none z-[999] opacity-[0.02] mix-blend-overlay">

@@ -33,12 +33,12 @@ export const Navbar: React.FC<NavbarProps> = ({
         >
           <img 
             src={LOGO_URL} 
-            alt="Sunset Noir Logo" 
+            alt="Big Cat Graphics Logo" 
             className="h-14 w-auto brightness-200" 
           />
           <div className="flex flex-col">
-            <span className="text-sm font-black italic tracking-tighter text-white">SUNSET</span>
-            <span className="text-[8px] tracking-[0.4em] uppercase opacity-40 font-bold text-white">NOIR STUDIO</span>
+            <span className="text-sm font-black italic tracking-tighter text-white">BIG CAT</span>
+            <span className="text-[8px] tracking-[0.3em] uppercase opacity-40 font-bold text-white">GRAPHICS GALLERY</span>
           </div>
         </button>
 

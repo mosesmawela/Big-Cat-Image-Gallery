@@ -18,7 +18,7 @@ export const AboutScreen = () => {
           {/* Header */}
           <div className="text-center space-y-6">
             <h1 className="text-5xl font-black tracking-tighter italic uppercase text-brand-peach">
-              About Sunset Noir
+              About Big Cat Graphics
             </h1>
             <p className="text-[12px] tracking-[0.5em] uppercase opacity-60 max-w-xl mx-auto">
               A premium digital studio specializing in curated 
@@ -31,7 +31,7 @@ export const AboutScreen = () => {
               Our Vision
             </h2>
             <p className="text-[10px] leading-relaxed opacity-80 max-w-3xl">
-              Sunset Noir is dedicated to the art of high-end digital environments. 
+              Big Cat Graphics is dedicated to the art of high-end digital environments. 
               We curate exclusive collections that transform digital spaces into 
               immersive landscapes. Through professional craftsmanship and a focus 
               on visual excellence, we provide the tools to personalize your world 

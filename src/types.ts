@@ -11,11 +11,25 @@ export interface Wallpaper {
   title: string;
   category: Category;
   description?: string;
+  story?: string;
+  specs?: {
+    camera?: string;
+    lens?: string;
+    aperture?: string;
+    iso?: string;
+    shutter?: string;
+    software?: string[];
+    colorSpace?: string;
+    aspectRatio?: string;
+  };
   tags?: string[];
-  software?: string[];
+  software?: string[]; // Legacy field
   isPro?: boolean;
   resolution?: '1080p' | '4K' | 'Ultrawide';
   isLive?: boolean;
+  downloadCount?: number;
+  rating?: number;
+  isFeatured?: boolean;
 }
 
 export type AppState = 'loading' | 'splash' | 'main' | 'category' | 'account' | 'pricing' | 'auth' | 'search' | 'new-releases';

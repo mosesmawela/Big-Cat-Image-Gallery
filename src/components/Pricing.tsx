@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Check, Zap, ArrowLeft } from 'lucide-react';
+import { Check, Sparkles, ArrowLeft } from 'lucide-react';
 
 const PLANS = [
   {
@@ -36,6 +36,7 @@ interface PricingProps {
   onUpgrade: (isYearly: boolean) => void;
   currentPlan?: string;
   onBack?: () => void;
+  isPro: boolean;
 }
 
 export const Pricing: React.FC<PricingProps> = ({ onUpgrade, currentPlan = 'Free', onBack }) => {
@@ -46,6 +47,8 @@ export const Pricing: React.FC<PricingProps> = ({ onUpgrade, currentPlan = 'Free
       {onBack && (
         <button 
           onClick={onBack}
+          title="Back"
+          aria-label="Back"
           className="absolute top-12 left-12 p-3 rounded-full border border-black/10 hover:bg-black/5 transition-all z-50"
         >
           <ArrowLeft size={18} />
@@ -60,11 +63,13 @@ export const Pricing: React.FC<PricingProps> = ({ onUpgrade, currentPlan = 'Free
             <span className={`text-xs uppercase tracking-widest ${!isYearly ? 'opacity-100' : 'opacity-30'}`}>Monthly</span>
             <button 
               onClick={() => setIsYearly(!isYearly)}
+              title={isYearly ? "Switch to Monthly" : "Switch to Yearly"}
+              aria-label={isYearly ? "Switch to Monthly" : "Switch to Yearly"}
               className="w-12 h-6 rounded-full bg-black/10 relative p-1 transition-colors"
             >
               <motion.div 
                 animate={{ x: isYearly ? 24 : 0 }}
-                className="w-4 h-4 rounded-full bg-black"
+                className="w-4 h-4 rounded-full bg-black" 
               />
             </button>
             <span className={`text-xs uppercase tracking-widest ${isYearly ? 'opacity-100' : 'opacity-30'}`}>
@@ -85,7 +90,7 @@ export const Pricing: React.FC<PricingProps> = ({ onUpgrade, currentPlan = 'Free
                   <h3 className="text-2xl font-black tracking-tighter italic uppercase mb-2">{plan.name}</h3>
                   <p className={`text-xs uppercase tracking-widest opacity-40`}>{plan.description}</p>
                 </div>
-                {plan.highlight && <Zap className="text-white" size={24} />}
+                {plan.highlight && <Sparkles className="text-white" size={24} />}
               </div>
 
               <div className="mb-12">

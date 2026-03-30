@@ -1,7 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, User as FirebaseUser } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, query, where, getDocs, onSnapshot, getDocFromServer } from 'firebase/firestore';
-import firebaseConfig from '../firebase-applet-config.json';
+import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, query, where, getDocs, onSnapshot, getDocFromServer, arrayUnion, arrayRemove, increment } from 'firebase/firestore';
+import firebaseConfig from '../../firebase-applet-config.json';
+import { User, Wallpaper } from '../types';
 
 // Initialize Firebase SDK
 const app = initializeApp(firebaseConfig);
@@ -9,7 +10,45 @@ export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 
-// Error Handling Spec for Firestore Operations
+export const toggleFavorite = async (userId: string, wallpaperId: string, isFavorite: boolean) => {
+  const userRef = doc(db, 'users', userId);
+  try {
+    await updateDoc(userRef, {
+      favorites: isFavorite ? arrayRemove(wallpaperId) : arrayUnion(wallpaperId),
+      updatedAt: new Date().toISOString()
+    });
+  } catch (error) {
+    handleFirestoreError(error, OperationType.UPDATE, `users/${userId}/favorites`);
+  }
+};
+
+export const recordDownload = async (userId: string, wallpaper: Wallpaper, resolution: string) => {
+  const userRef = doc(db, 'users', userId);
+  const wallpaperRef = doc(db, 'wallpapers', wallpaper.id);
+
+  const downloadEntry = {
+    id: crypto.randomUUID(),
+    wallpaperId: wallpaper.id,
+    title: wallpaper.title,
+    date: new Date().toISOString(),
+    resolution: resolution
+  };
+
+  try {
+    await Promise.all([
+      updateDoc(userRef, {
+        downloadHistory: arrayUnion(downloadEntry),
+        updatedAt: new Date().toISOString()
+      }),
+      updateDoc(wallpaperRef, {
+        downloadCount: increment(1)
+      })
+    ]);
+  } catch (error) {
+    handleFirestoreError(error, OperationType.UPDATE, `users/${userId}/downloadHistory`);
+  }
+};
+
 export enum OperationType {
   CREATE = 'create',
   UPDATE = 'update',

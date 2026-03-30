@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Mail, Lock, User, ArrowRight, Chrome } from 'lucide-react';
-import { auth, googleProvider, signInWithPopup } from '../firebase';
+import { auth, googleProvider, signInWithPopup } from '../lib/firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { toast } from 'sonner';
 
@@ -78,6 +78,7 @@ export const Auth: React.FC<AuthProps> = ({ isOpen, onClose, onAuthSuccess }) =>
           >
             <button 
               onClick={onClose}
+              title="Close"
               className="absolute top-8 right-8 p-2 rounded-full hover:bg-black/5 transition-colors"
             >
               <X size={20} />
@@ -100,6 +101,7 @@ export const Auth: React.FC<AuthProps> = ({ isOpen, onClose, onAuthSuccess }) =>
               <button 
                 onClick={handleGoogleLogin}
                 disabled={loading}
+                title="Google Sign In"
                 className="bg-black/5 text-black py-4 rounded-full text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-black/10 transition-all flex items-center justify-center gap-4 border border-black/5"
               >
                 <Chrome size={16} />
@@ -107,6 +109,7 @@ export const Auth: React.FC<AuthProps> = ({ isOpen, onClose, onAuthSuccess }) =>
               </button>
               <button 
                 disabled={loading}
+                title="Apple Sign In"
                 className="bg-black/5 text-black py-4 rounded-full text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-black/10 transition-all flex items-center justify-center gap-4 border border-black/5"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
@@ -134,6 +137,7 @@ export const Auth: React.FC<AuthProps> = ({ isOpen, onClose, onAuthSuccess }) =>
                     <input 
                       type="text" 
                       placeholder="John Doe"
+                      title="Full Name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       className="w-full bg-black/5 rounded-full py-4 pl-14 pr-6 text-sm focus:outline-none focus:ring-2 focus:ring-black/10 transition-all"
@@ -149,6 +153,7 @@ export const Auth: React.FC<AuthProps> = ({ isOpen, onClose, onAuthSuccess }) =>
                   <input 
                     type="email" 
                     placeholder="name@example.com"
+                    title="Email Address"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full bg-black/5 rounded-full py-4 pl-14 pr-6 text-sm focus:outline-none focus:ring-2 focus:ring-black/10 transition-all"
@@ -163,6 +168,7 @@ export const Auth: React.FC<AuthProps> = ({ isOpen, onClose, onAuthSuccess }) =>
                   <input 
                     type="password" 
                     placeholder="••••••••"
+                    title="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="w-full bg-black/5 rounded-full py-4 pl-14 pr-6 text-sm focus:outline-none focus:ring-2 focus:ring-black/10 transition-all"

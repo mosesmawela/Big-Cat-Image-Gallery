@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Space+Grotesk:wght@300;500;700&family=Playfair+Display:ital,wght@0,400;0,900;1,400&family=Outfit:wght@300;600&display=swap');
+@import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -8,12 +8,55 @@
   --font-display: "Playfair+Display", serif;
   --font-space: "Space+Grotesk", sans-serif;
   --font-outfit: "Outfit", sans-serif;
-  
-  @keyframes gradient-slow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+     @keyframes pulse-slow {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.1); }
+    }
+    
+    --animate-pulse-slow: pulse-slow 8s ease-in-out infinite;
+
+    @keyframes gradient-move {
+      0% { transform: translate(0%, 0%) rotate(0deg); }
+      50% { transform: translate(-10%, 10%) rotate(180deg); }
+      100% { transform: translate(0%, 0%) rotate(360deg); }
+    }
+    
+    --animate-gradient-move: gradient-move 30s linear infinite;
+
+    @keyframes animate-gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    --animate-gradient: animate-gradient 20s ease-in-out infinite;
+
+   --color-deep-navy: #101C2F;
+   --color-navy: #242F49;
+   --color-slate: #384358;
+   --color-brand-peach: #FFA586;
+   --color-brand-crimson: #B51A2B;
+   --color-brand-burgundy: #541A25;
+}
+
+@layer base {
+  body {
+    @apply bg-black text-white selection:bg-blue-500/50 selection:text-white antialiased overflow-x-hidden p-0 m-0;
   }
-  
-  --animate-gradient-slow: gradient-slow 15s ease infinite;
+}
+
+/* Storytelling Word Spans */
+.story-word {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(10px);
+  will-change: transform, opacity, filter;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

@@ -103,7 +103,7 @@ export const ScrollSequence: React.FC<ScrollSequenceProps> = ({ frameCount, prog
                initial={{ left: "-100%" }}
                animate={{ left: "100%" }}
                transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-               className="absolute h-full w-20 bg-amber-500"
+               className="absolute h-full w-20 bg-brand-peach"
              />
           </div>
           <p className="text-[10px] uppercase tracking-[1em] font-black italic opacity-40">Compiling Rift</p>

@@ -4,7 +4,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 // Note: In production, the API key should be handled via a secure backend or environment variable
 const GEN_AI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || '');
 
-export const useNeuralSearch = () => {
+export const useAISearch = () => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -20,7 +20,7 @@ export const useNeuralSearch = () => {
       const model = GEN_AI.getGenerativeModel({ model: "gemini-1.5-flash" });
       
       const prompt = `
-        You are a visual search assistant for a premium wallpaper gallery. 
+        You are a visual search assistant for a premium gallery. 
         Transform the following user query into a structured search object.
         User Query: "${userPrompt}"
         
@@ -40,8 +40,8 @@ export const useNeuralSearch = () => {
       const jsonStr = text.replace(/```json|```/g, '').trim();
       return JSON.parse(jsonStr);
     } catch (err) {
-      console.error('Neural Search Analysis Failed:', err);
-      setError('Neural analysis failed. Falling back to text search.');
+      console.error('AI Search Analysis Failed:', err);
+      setError('AI analysis failed. Falling back to text search.');
       return { optimizedQuery: userPrompt, tags: [], category: null };
     } finally {
       setIsAnalyzing(false);

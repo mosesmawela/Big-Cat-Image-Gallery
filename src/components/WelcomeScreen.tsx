@@ -97,7 +97,7 @@ const StorySection = ({
            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
            <div className="absolute bottom-16 left-16 flex items-center gap-6">
               <div className="w-16 h-px bg-brand-peach" />
-              <p className="text-[10px] uppercase font-black tracking-[1em] opacity-40 text-white">Module.Seq_0{Math.floor(Math.random()*9)}</p>
+              <p className="text-[10px] uppercase font-black tracking-[1em] opacity-40 text-white">Visual.Slide_0{Math.floor(Math.random()*9)}</p>
            </div>
         </div>
       </div>
@@ -193,7 +193,7 @@ export const WelcomeScreen: React.FC<{ onEnter: () => void }> = ({ onEnter }) =>
 
                 <div className="flex items-center gap-12 mt-24">
                    <div className="w-24 h-1 bg-brand-peach" />
-                   <p className="text-[10px] uppercase tracking-[1.5em] font-black opacity-20 whitespace-nowrap animate-pulse">Neural Thread Active</p>
+                   <p className="text-[10px] uppercase tracking-[1.5em] font-black opacity-20 whitespace-nowrap animate-pulse">System Online</p>
                 </div>
             </section>
 
@@ -205,8 +205,8 @@ export const WelcomeScreen: React.FC<{ onEnter: () => void }> = ({ onEnter }) =>
             />
             
             <StorySection 
-              title="The Archive" 
-              subtitle="Access an ever-evolving library of elite textures, scenes, and visual narratives."
+              title="The Gallery" 
+              subtitle="Explore our library of high-resolution digital art, textures, and landscapes."
               image={STORY_IMAGES[1]}
               className="bg-black/30 backdrop-blur-3xl"
             />
@@ -218,8 +218,8 @@ export const WelcomeScreen: React.FC<{ onEnter: () => void }> = ({ onEnter }) =>
             />
 
             <StorySection 
-              title="Final Descent" 
-              subtitle="The rift is opening. Prepare for total visual sensory immersion."
+              title="Final Step" 
+              subtitle="You're almost there. Prepare for total visual immersion."
               image={STORY_IMAGES[3]}
               className="bg-black/60 backdrop-blur-3xl"
             />
@@ -241,7 +241,7 @@ export const WelcomeScreen: React.FC<{ onEnter: () => void }> = ({ onEnter }) =>
                     <motion.div key="s1" initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} className="space-y-12">
                        <div className="space-y-4">
                          <p className="text-[10px] uppercase font-black tracking-widest text-brand-peach">Phase 01</p>
-                         <h2 className="text-7xl font-black italic uppercase tracking-tighter text-white">Your Visual Frequency?</h2>
+                         <h2 className="text-7xl font-black italic uppercase tracking-tighter text-white">What's your style?</h2>
                        </div>
                        <div className="grid grid-cols-2 gap-6">
                          {['CYBERPUNK', 'MINIMALIST', 'NATURE', 'ABSTRACT'].map((v) => (
@@ -278,11 +278,11 @@ export const WelcomeScreen: React.FC<{ onEnter: () => void }> = ({ onEnter }) =>
 
                   {onboardingStep === 2 && (
                     <motion.div key="s3" initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} className="space-y-12">
-                       <h2 className="text-7xl font-black italic uppercase tracking-tighter text-center text-white">Neural Updates</h2>
+                       <h2 className="text-7xl font-black italic uppercase tracking-tighter text-center text-white">Stay Updated</h2>
                        <div className="relative max-w-2xl mx-auto group">
                           <input 
                             type="email" 
-                            placeholder="YOUR_EMAIL@ARCHIVE.COM" 
+                            placeholder="YOUR_EMAIL@EXAMPLE.COM" 
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             className="w-full bg-transparent border-b-2 border-white/20 py-8 text-3xl font-black uppercase tracking-tighter focus:border-brand-peach outline-none transition-colors italic text-white"
@@ -304,8 +304,8 @@ export const WelcomeScreen: React.FC<{ onEnter: () => void }> = ({ onEnter }) =>
                           <CheckCircle2 size={64} className="text-black" />
                        </div>
                        <div className="space-y-4">
-                         <h2 className="text-8xl font-black italic uppercase tracking-tighter text-white">Welcome to Rift</h2>
-                         <p className="text-sm uppercase tracking-[1em] opacity-40 text-white">Profile synchronization complete</p>
+                         <h2 className="text-8xl font-black italic uppercase tracking-tighter text-white">Welcome Home</h2>
+                         <p className="text-sm uppercase tracking-[1em] opacity-40 text-white">Setup complete</p>
                        </div>
                        <button 
                          onClick={() => {
@@ -315,7 +315,7 @@ export const WelcomeScreen: React.FC<{ onEnter: () => void }> = ({ onEnter }) =>
                          disabled={isSyncing}
                          className="px-24 py-8 bg-white text-black rounded-full font-black uppercase text-xs tracking-[0.5em] italic hover:scale-105 transition-transform disabled:opacity-50"
                        >
-                         {isSyncing ? 'Synchronizing...' : 'Enter The Studio'}
+                         {isSyncing ? 'Synchronizing...' : 'Start Browsing'}
                        </button>
                     </motion.div>
                   )}

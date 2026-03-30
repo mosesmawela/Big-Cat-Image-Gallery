@@ -82,7 +82,7 @@ const WallpaperItem = memo(({ wp, onExpand, isProUser, showExplicit, onDownload 
             exit={{ opacity: 0 }}
             className="absolute inset-0 bg-white/5 z-10 overflow-hidden"
           >
-            {/* 1px Neural Scan Beam */}
+            {/* 1px Gallery Scan Beam */}
             <motion.div 
               animate={{ 
                 top: ['-10%', '110%'],
@@ -157,7 +157,7 @@ const WallpaperItem = memo(({ wp, onExpand, isProUser, showExplicit, onDownload 
           <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mb-6 border border-white/20">
             <Lock className="text-white" size={32} />
           </div>
-          <p className="text-[10px] tracking-[0.5em] uppercase font-bold text-white mb-2">Pro Content</p>
+          <p className="text-[10px] tracking-[0.5em] uppercase font-bold text-white mb-2">Pro Wallpaper</p>
           <div className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded-full">
             <span className="text-[10px] font-black uppercase tracking-widest italic">Upgrade to Unlock</span>
           </div>
@@ -205,11 +205,11 @@ export const WallpaperGrid: React.FC<WallpaperGridProps> = ({ wallpapers, loadin
     const isFav = user.favorites?.includes(wp.id);
     try {
       await toggleFavorite(user.uid, wp.id, isFav);
-      toast.success(isFav ? 'Removed from Archives' : 'Added to Archives', {
-        description: `${wp.title} has been ${isFav ? 'released' : 'synchronized'} with your profile.`
+      toast.success(isFav ? 'Removed from Favorites' : 'Added to Favorites', {
+        description: `${wp.title} has been ${isFav ? 'removed from' : 'saved to'} your profile.`
       });
     } catch (e) {
-      toast.error('Sync Failed', { description: 'Could not connect to neural link.' });
+      toast.error('Sync Failed', { description: 'Could not connect to profile.' });
     }
   };
 
@@ -225,7 +225,7 @@ export const WallpaperGrid: React.FC<WallpaperGridProps> = ({ wallpapers, loadin
         await navigator.share(shareData);
       } else {
         await navigator.clipboard.writeText(shareData.url);
-        toast.success('Neural Link Copied', { description: 'Share URL copied to clipboard.' });
+        toast.success('Link Copied', { description: 'Share URL copied to clipboard.' });
       }
     } catch (e) {
       // User cancelled or share failed
@@ -243,14 +243,14 @@ export const WallpaperGrid: React.FC<WallpaperGridProps> = ({ wallpapers, loadin
       const url = wp.downloadUrls?.[resolution as keyof typeof wp.downloadUrls] || wp.url;
       await downloadImage(url, `${wp.title.replace(/\s+/g, '_')}_${resolution}.jpg`);
       
-      toast.success(`Deployment Started`, { description: `${resolution} session initialized.` });
+      toast.success(`Download Started`, { description: `${resolution} session initialized.` });
       
       if (user) {
         await recordDownload(user.uid, wp, resolution);
       }
       onDownload?.(wp, resolution);
     } catch (e) {
-      toast.error('Neural Link Severed', { description: 'Could not resolve data stream.' });
+      toast.error('Connection Failed', { description: 'Could not resolve data stream.' });
     }
   };
 
@@ -297,7 +297,7 @@ export const WallpaperGrid: React.FC<WallpaperGridProps> = ({ wallpapers, loadin
               onClick={() => setExpandedWp(null)}
               className="fixed top-12 right-12 flex items-center gap-4 px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full text-white transition-all group z-[220]"
             >
-              <span className="text-xs tracking-[0.4em] uppercase font-bold">Close Archive</span>
+              <span className="text-xs tracking-[0.4em] uppercase font-bold">Close Gallery</span>
               <X size={20} className="group-hover:rotate-90 transition-transform" />
             </motion.button>
 
@@ -340,12 +340,12 @@ export const WallpaperGrid: React.FC<WallpaperGridProps> = ({ wallpapers, loadin
                 >
                   <div className="flex items-center gap-4 opacity-40">
                     <Globe size={16} />
-                    <span className="text-[10px] uppercase tracking-[0.5em] font-black italic">The Narrative</span>
+                    <span className="text-[10px] uppercase tracking-[0.5em] font-black italic">The Story</span>
                   </div>
                   <div className="space-y-6">
                     <h3 className="text-3xl font-black italic uppercase tracking-tighter">The Visionary Origin</h3>
                     <p className="text-lg font-light leading-relaxed text-white/70">
-                      {expandedWp.story || "This masterpiece was captured in the heart of the digital rift, where light and shadow dance in perpetual motion. Every pixel was calibrated to evoke a sense of infinite exploration and visual tranquility. It represents the pinnacle of modern digital craftsmanship."}
+                      {expandedWp.story || "This masterpiece was captured in the heart of the digital landscape, where light and shadow dance in perpetual motion. Every pixel was calibrated to evoke a sense of infinite exploration and visual tranquility. It represents the pinnacle of modern digital craftsmanship."}
                     </p>
                   </div>
                 </motion.div>
@@ -365,7 +365,7 @@ export const WallpaperGrid: React.FC<WallpaperGridProps> = ({ wallpapers, loadin
                       {expandedWp.category}
                     </span>
                     <span className="px-4 py-1.5 rounded-full bg-white/5 text-white/40 text-[8px] font-black uppercase tracking-widest border border-white/5">
-                      {expandedWp.isPro ? 'Pro Elite' : 'Public Domain'}
+                      {expandedWp.isPro ? 'Pro Member' : 'Public Domain'}
                     </span>
                   </div>
                   <h2 className="text-5xl md:text-7xl font-black italic uppercase tracking-tighter leading-none">{expandedWp.title}</h2>
@@ -383,7 +383,7 @@ export const WallpaperGrid: React.FC<WallpaperGridProps> = ({ wallpapers, loadin
                       className={`transition-all mb-3 ${user?.favorites?.includes(expandedWp.id) ? 'text-rose-500 scale-110' : 'opacity-40 group-hover:text-rose-500 group-hover:scale-110'}`} 
                     />
                     <span className="text-[8px] font-black uppercase tracking-widest opacity-40">
-                      {user?.favorites?.includes(expandedWp.id) ? 'Saved to Archives' : 'Add to Favorites'}
+                      {user?.favorites?.includes(expandedWp.id) ? 'Saved' : 'Add to Favorites'}
                     </span>
                   </button>
                   <button 
@@ -391,7 +391,7 @@ export const WallpaperGrid: React.FC<WallpaperGridProps> = ({ wallpapers, loadin
                     className="flex flex-col items-center justify-center p-6 bg-white/5 border border-white/10 rounded-3xl hover:bg-white/10 transition-all group"
                   >
                     <Share2 size={20} className="opacity-40 group-hover:text-blue-400 group-hover:scale-110 transition-all mb-3" />
-                    <span className="text-[8px] font-black uppercase tracking-widest opacity-40">Share Archive</span>
+                    <span className="text-[8px] font-black uppercase tracking-widest opacity-40">Share Gallery</span>
                   </button>
                 </div>
 
@@ -399,14 +399,14 @@ export const WallpaperGrid: React.FC<WallpaperGridProps> = ({ wallpapers, loadin
                 <div className="bg-black/40 border border-white/5 rounded-[40px] p-8 space-y-8 backdrop-blur-2xl">
                   <div className="flex items-center gap-4 opacity-40">
                     <Camera size={16} />
-                    <span className="text-[10px] uppercase tracking-[0.5em] font-black italic">Neural Meta Data</span>
+                    <span className="text-[10px] uppercase tracking-[0.5em] font-black italic">Technical Metadata</span>
                   </div>
                   <div className="grid grid-cols-2 gap-y-8 gap-x-12">
                     {[
-                      { label: 'Neural Camera', val: expandedWp.specs?.camera || 'Hasselblad H6D' },
+                      { label: 'Camera Model', val: expandedWp.specs?.camera || 'Hasselblad H6D' },
                       { label: 'Optical Lens', val: expandedWp.specs?.lens || '100mm f/2.2' },
                       { label: 'Aperture', val: expandedWp.specs?.aperture || 'f/8.0' },
-                      { label: 'Neural ISO', val: expandedWp.specs?.iso || '100' },
+                      { label: 'ISO Sensitivity', val: expandedWp.specs?.iso || '100' },
                       { label: 'Color Space', val: expandedWp.specs?.colorSpace || 'Display P3' },
                       { label: 'Dynamic Range', val: '14.2 Stops' }
                     ].map((spec, i) => (
@@ -420,12 +420,12 @@ export const WallpaperGrid: React.FC<WallpaperGridProps> = ({ wallpapers, loadin
 
                 {/* Download Matrix */}
                 <div className="space-y-6">
-                  <p className="text-[10px] tracking-[0.5em] uppercase opacity-40 font-black italic ml-4">Deployment Options</p>
+                  <p className="text-[10px] tracking-[0.5em] uppercase opacity-40 font-black italic ml-4">Download Options</p>
                   <div className="grid gap-3">
                     {[
-                      { label: '1080p Neural Optimized', res: '1080p', pro: false },
+                      { label: '1080p High Definition', res: '1080p', pro: false },
                       { label: '4K Ultra High Fidelity', res: '4K', pro: true },
-                      { label: 'Ultrawide Vision Archives', res: 'Ultrawide', pro: true },
+                      { label: 'Ultrawide Gallery Files', res: 'Ultrawide', pro: true },
                     ].map((opt) => {
                       const isOptLocked = (opt.pro && !isProUser) || isExplicitHidden(expandedWp);
                       return (
@@ -448,7 +448,7 @@ export const WallpaperGrid: React.FC<WallpaperGridProps> = ({ wallpapers, loadin
                 {/* Trust/Legal */}
                 <div className="flex items-center gap-4 px-8 py-4 bg-white/5 rounded-full border border-white/5 opacity-40">
                   <Shield size={14} />
-                  <span className="text-[8px] font-black uppercase tracking-[0.3em] italic">Human-Made Verified Digital Archive</span>
+                  <span className="text-[8px] font-black uppercase tracking-[0.3em] italic">Human-Made Verified Digital Art</span>
                 </div>
               </motion.div>
             </div>

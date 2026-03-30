@@ -69,7 +69,7 @@ const HeroSection = ({ wallpapers }: { wallpapers: any[] }) => {
             Digital <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-200 to-zinc-800">Evolution</span>
           </h1>
           <p className="text-sm font-bold tracking-widest opacity-40 leading-relaxed max-w-md mx-auto italic uppercase">
-            Curated visual excellence for the elite setup. High-fidelity art in the rift.
+            Curated visual excellence for the elite setup. High-fidelity art for your desktop.
           </p>
         </motion.div>
         
@@ -100,7 +100,7 @@ const HeroSection = ({ wallpapers }: { wallpapers: any[] }) => {
             onClick={() => navigate('/search')}
             className="flex items-center gap-4 px-16 py-6 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 transition-all font-black text-[10px] uppercase tracking-[0.3em] italic"
           >
-            Explore Archive
+            Explore Gallery
             <ArrowRight size={16} className="opacity-40" />
           </button>
         </motion.div>
@@ -141,7 +141,7 @@ export const HomeScreen = () => {
           <section className="w-full bg-black/40 py-24 border-y border-white/5 overflow-hidden relative">
             <NoodleConnection className="opacity-50" />
             <Marquee 
-              items={['4K RESOLUTION', 'LIVE WALLPAPERS', 'ULTRAWIDE', 'PREMIUM ASSETS', 'CYBERPUNK', 'NATURE ARCHIVES']} 
+              items={['4K RESOLUTION', 'LIVE WALLPAPERS', 'ULTRAWIDE', 'PREMIUM ASSETS', 'CYBERPUNK', 'NATURE GALLERY']} 
               direction="left"
               speed={40}
             />
@@ -157,7 +157,7 @@ export const HomeScreen = () => {
         <SectionReveal delay={0.2}>
           <section className="w-full border-y border-white/5 bg-zinc-950/50">
             <ReleaseCarousel 
-              title="Neural New Arrivals" 
+              title="Gallery New Arrivals" 
               wallpapers={wallpapers.slice(0, 10)} 
               onDownload={(wp, res) => console.log('Download', wp.title, res)}
             />
@@ -183,7 +183,7 @@ export const HomeScreen = () => {
                       <img src={cat.image} className="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-110" alt={cat.name} loading="lazy" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent group-hover:from-brand-burgundy/60 transition-colors" />
                       <div className="absolute bottom-8 left-8">
-                        <p className="text-[8px] uppercase tracking-[1em] text-white/40 mb-2 font-black">Archive Module</p>
+                        <p className="text-[8px] uppercase tracking-[1em] text-white/40 mb-2 font-black">Gallery Collection</p>
                         <h3 className="text-3xl font-black italic uppercase text-white group-hover:text-brand-peach transition-colors">{cat.name}</h3>
                       </div>
                    </motion.div>
@@ -207,7 +207,7 @@ export const HomeScreen = () => {
       {loading && (
         <div className="fixed bottom-12 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-4">
           <div className="w-8 h-8 border-2 border-white/10 border-t-brand-peach rounded-full animate-spin" />
-          <p className="text-[8px] uppercase tracking-[1em] opacity-40 font-black italic">Syncing Rift</p>
+          <p className="text-[8px] uppercase tracking-[1em] opacity-40 font-black italic">Updating Gallery</p>
         </div>
       )}
     </div>

@@ -13,13 +13,13 @@ export const ProScreen = () => {
 
   const handleUpgrade = async (isYearly: boolean) => {
     if (!user) {
-      toast.info('Identity Required', { description: 'Please establish a neural link to upgrade.' });
+      toast.info('Log In Required', { description: 'Please log in to upgrade your account.' });
       login();
       return;
     }
 
     setIsUpgrading(true);
-    toast.loading('Initializing Stripe Session...', { id: 'upgrade-toast' });
+    toast.loading('Initializing Checkout...', { id: 'upgrade-toast' });
 
     // Simulate Stripe Checkout delay
     await new Promise(resolve => setTimeout(resolve, 2000));
@@ -32,17 +32,17 @@ export const ProScreen = () => {
         updatedAt: new Date().toISOString()
       });
 
-      toast.success('Neural Link Elevated', { 
+      toast.success('Account Upgraded', { 
         id: 'upgrade-toast',
-        description: `Pro Access ${isYearly ? 'Annual' : 'Monthly'} session established.` 
+        description: `Pro Access ${isYearly ? 'Annual' : 'Monthly'} activated successfully.` 
       });
 
       // Redirect to account to show new status
       navigate('/account');
     } catch (error: any) {
-      toast.error('Synthesis Failed', { 
+      toast.error('Upgrade Failed', { 
         id: 'upgrade-toast',
-        description: 'Could not elevate account status.' 
+        description: 'Could not update account status.' 
       });
     } finally {
       setIsUpgrading(false);
@@ -62,7 +62,7 @@ export const ProScreen = () => {
         <div className="fixed inset-0 z-[1000] bg-black/60 backdrop-blur-md flex items-center justify-center">
           <div className="flex flex-col items-center gap-6">
             <div className="w-16 h-16 border-4 border-white/10 border-t-amber-500 rounded-full animate-spin" />
-            <p className="text-[10px] uppercase tracking-[1em] font-black italic animate-pulse text-amber-500">Elevating Clearance</p>
+            <p className="text-[10px] uppercase tracking-[1em] font-black italic animate-pulse text-amber-500">Processing Upgrade</p>
           </div>
         </div>
       )}

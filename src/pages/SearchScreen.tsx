@@ -5,7 +5,7 @@ import { useAuthContext } from '../providers/AuthProvider';
 import { WallpaperGrid } from '../components/WallpaperGrid';
 import { motion, AnimatePresence } from 'motion/react';
 import { Search, X, Sliders, TrendingUp, Sparkles, Filter, BrainCircuit, Loader2 } from 'lucide-react';
-import { useNeuralSearch } from '../hooks/useNeuralSearch';
+import { useAISearch } from '../hooks/useAISearch';
 
 export const SearchScreen = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,7 +16,7 @@ export const SearchScreen = () => {
   
   const [inputValue, setInputValue] = useState(queryParam);
   const { user, isPro } = useAuthContext();
-  const { extractSearchParameters, isAnalyzing } = useNeuralSearch();
+  const { extractSearchParameters, isAnalyzing } = useAISearch();
 
   const { wallpapers, loading, hasMore, loadMore } = useWallpapers({ 
     searchQuery: queryParam,
@@ -31,10 +31,10 @@ export const SearchScreen = () => {
 
     // AI Analysis if the query looks like a description (more than 2 words)
     if (inputValue.split(' ').length > 2) {
-      const neuralParams = await extractSearchParameters(inputValue);
+      const aiParams = await extractSearchParameters(inputValue);
       setSearchParams(prev => {
-        prev.set('q', neuralParams.optimizedQuery || inputValue);
-        if (neuralParams.category) prev.set('category', neuralParams.category.toLowerCase());
+        prev.set('q', aiParams.optimizedQuery || inputValue);
+        if (aiParams.category) prev.set('category', aiParams.category.toLowerCase());
         return prev;
       });
     } else {
@@ -90,6 +90,8 @@ export const SearchScreen = () => {
               <button 
                 type="button"
                 onClick={() => { setInputValue(''); setSearchParams({}); }}
+                title="Clear Search"
+                aria-label="Clear Search"
                 className="p-2 hover:bg-white/10 rounded-full transition-all"
               >
                 <X size={20} className="opacity-40" />
@@ -139,7 +141,7 @@ export const SearchScreen = () => {
         {loading && (
           <div className="flex flex-col items-center justify-center py-20 gap-8">
             <div className="w-12 h-12 border-2 border-white/10 border-t-white rounded-full animate-spin" />
-            <p className="text-[10px] uppercase tracking-[1em] opacity-40 animate-pulse">Scanning Neural Archives</p>
+            <p className="text-[10px] uppercase tracking-[1em] opacity-40 animate-pulse">Scanning Gallery Archive</p>
           </div>
         )}
 

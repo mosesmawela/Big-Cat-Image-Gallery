@@ -33,12 +33,12 @@ export const Navbar: React.FC<NavbarProps> = ({
         >
           <img 
             src={LOGO_URL} 
-            alt="BCG Logo" 
+            alt="Sunset Noir Logo" 
             className="h-14 w-auto brightness-200" 
           />
           <div className="flex flex-col">
-            <span className="text-sm font-black italic tracking-tighter text-white">BIG CAT</span>
-            <span className="text-[8px] tracking-[0.4em] uppercase opacity-40 font-bold text-white">Archives</span>
+            <span className="text-sm font-black italic tracking-tighter text-white">SUNSET</span>
+            <span className="text-[8px] tracking-[0.4em] uppercase opacity-40 font-bold text-white">NOIR STUDIO</span>
           </div>
         </button>
 
@@ -77,7 +77,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className={`px-6 py-2 rounded-full border text-[10px] tracking-[0.3em] uppercase font-bold transition-all ${isPro ? 'bg-brand-peach border-brand-peach text-deep-navy' : 'border-white/10 text-white hover:bg-white/5'}`}
             title={isPro ? "Pro Active" : "Upgrade to Pro"}
           >
-            {isPro ? 'Pro Active' : 'Go Pro'}
+            {isPro ? 'Pro Member' : 'Go Pro'}
           </button>
 
           {user ? (
@@ -92,7 +92,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button 
               onClick={() => setIsAuthOpen(true)}
               className="p-3 bg-white/5 border border-white/10 rounded-full text-white hover:bg-white/10 transition-colors"
-              title="Identity Login"
+              title="Log In"
             >
               <User size={18} />
             </button>
